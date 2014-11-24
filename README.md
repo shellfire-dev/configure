@@ -67,7 +67,7 @@ _program()
 |`namespace`|Namespace used to differentiate configuration setting from any other|_No_|
 |`configurationSettingName`|Name of configuration setting|_No_|
 
-#### `configure_getConfigurationSetting`
+#### `configure_getValue`
 
 |Parameter|Value|Optional|
 |---------|-----|--------|
@@ -79,7 +79,7 @@ Use this function to obtain the value of a configuration setting. For example, t
 
 ```bash
 …
-local repositoryName="$(configure_getConfigurationSetting 'swaddle_github' 'repository_name')"
+local repositoryName="$(configure_getValue 'swaddle_github' 'repository_name')"
 …
 ```
 
