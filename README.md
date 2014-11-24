@@ -64,7 +64,7 @@ _program()
 ### Functions
 
 ***
-#### Function `configure_register`
+#### `configure_register`
 
 |Parameter|Value|Optional|
 |---------|-----|--------|
@@ -97,7 +97,7 @@ A `namespace` must consist only of lower and upper case letters, digits and unde
 The `default` may be whitespace-separated without using quotes; all values are concatenated together with a single `SP` separator.
 
 ***
-#### Function `configure_isValueValid`
+#### `configure_isValueValid`
 
 |Parameter|Value|Optional|
 |---------|-----|--------|
@@ -125,7 +125,7 @@ configure_register Value RpmLicence swaddle_rpm licence
 ```
 
 ***
-#### Function `configure_getValue`
+#### `configure_getValue`
 
 |Parameter|Value|Optional|
 |---------|-----|--------|
@@ -140,7 +140,7 @@ local repositoryName="$(configure_getValue 'swaddle_github' 'repository_name')"
 ```
 
 ***
-#### Function `configure_iterateOverArrayWithDefaultsIfEmpty`
+#### `configure_iterateOverArrayWithDefaultsIfEmpty`
 
 |Parameter|Value|Optional|
 |---------|-----|--------|
@@ -164,7 +164,7 @@ configure_iterateOverArrayWithDefaultsIfEmpty 'swaddle_apt' 'architectures' some
 will iterate over whatever is in `architectures`, or, if, empty, the values `amd64` and `i386`.
 
 ***
-#### Function `configure_callFunctionWithDefaultsIfEmpty`
+#### `configure_callFunctionWithDefaultsIfEmpty`
 
 |Parameter|Value|Optional|
 |---------|-----|--------|
