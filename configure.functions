@@ -1,24 +1,10 @@
+core_usesIn configure validate
 core_usesIn core variable variable/array
-
-configure_getValue()
-{
-	local namespace="$1"
-	local configurationSettingName="$2"
-	local configurationSettingValue
-	local configurationSettingValidate
-	local configurationSettingDefault
-	local configurationSettingIsArray
-	_configure_configurationSetting "$namespace" "$configurationSettingName"
-		
-	local core_variable_indirectValue_result
-	core_variable_indirectValue "$configurationSettingValue"
-	printf '%s' "$core_variable_indirectValue_result"
-}
 
 configure_register()
 {
 	local kind="$1"
-	local configurationValidationFunction="configure_validate${2}"
+	local configurationValidationFunction="configure_validate_${2}"
 	local namespace="$3"
 	local configurationSettingName="$4"
 	
@@ -162,6 +148,48 @@ configure_source()
 	fi
 }
 
+core_usesIn configure validate
+configure_validate()
+{
+	local namespace="$1"
+	
+	_configure_validate_callback()
+	{
+		local configurationSettingName="$core_variable_array_element"
+		local configurationSettingValue
+		local configurationSettingValidate
+		local configurationSettingDefault
+		local configurationSettingIsArray
+		_configure_configurationSetting "$namespace" "$configurationSettingName"
+	
+		if _configure_configurationSettingIsArray; then
+			continue
+		fi
+		if core_variable_isUnset "$configurationSettingValue"; then
+			core_exitError $core_commandLine_exitCode_CONFIG "The configuration setting '$namespace $configurationSettingName' can not be unset"
+		fi
+	}
+	
+	local configurationSettingNamespace
+	_configure_configurationNamespace
+	core_variable_array_iterate "$configurationSettingNamespace" _configure_validate_callback
+}
+
+configure_getValue()
+{
+	local namespace="$1"
+	local configurationSettingName="$2"
+	local configurationSettingValue
+	local configurationSettingValidate
+	local configurationSettingDefault
+	local configurationSettingIsArray
+	_configure_configurationSetting "$namespace" "$configurationSettingName"
+		
+	local core_variable_indirectValue_result
+	core_variable_indirectValue "$configurationSettingValue"
+	printf '%s' "$core_variable_indirectValue_result"
+}
+
 configure_iterateOverArrayWithDefaultsIfEmpty()
 {
 	local namespace="$1"
@@ -202,59 +230,7 @@ configure_callFunctionWithDefaultsIfEmpty()
 	fi
 }
 
-configure_validate()
-{
-	local namespace="$1"
-	
-	_configure_validate_callback()
-	{
-		local configurationSettingName="$core_variable_array_element"
-		local configurationSettingValue
-		local configurationSettingValidate
-		local configurationSettingDefault
-		local configurationSettingIsArray
-		_configure_configurationSetting "$namespace" "$configurationSettingName"
-	
-		if _configure_configurationSettingIsArray; then
-			continue
-		fi
-		if core_variable_isUnset "$configurationSettingValue"; then
-			core_exitError $core_commandLine_exitCode_CONFIG "The configuration setting '$namespace $configurationSettingName' can not be unset"
-		fi
-	}
-	
-	local configurationSettingNamespace
-	_configure_configurationNamespace
-	core_variable_array_iterate "$configurationSettingNamespace" _configure_validate_callback
-}
-
-configure_validateAny()
-{
-	:
-}
-
-configure_validateNotEmpty()
-{
-	if [ -z "$1" ]; then
-		core_exitError $core_commandLine_exitCode_CONFIG "The configuration setting '$configurationSettingName' can not be empty"
-	fi
-}
-
-configure_validateBoolean()
-{
-	if core_variable_isInvalidBoolean "$1"; then
-		core_exitError $core_commandLine_exitCode_CONFIG "The configuration setting '$configurationSettingName' ('$1') is not a valid boolean"
-	fi
-}
-
-configure_validateReadableSearchableFolderPath()
-{
-	if ! core_path_isReadableAndSearchableFolderPath "$1"; then
-		core_exitError $core_commandLine_exitCode_CONFIG "The configuration setting '$configurationSettingName' ('$1') is not a readable, searchable folder path"
-	fi
-}
-
-configure_validateValue()
+configure_isValueValid()
 {
 	local snippetName="$1"
 	local configurationSettingValue="$2"

@@ -1,0 +1,25 @@
+configure_validate_Any()
+{
+	:
+}
+
+configure_validate_NotEmpty()
+{
+	if [ -z "$1" ]; then
+		core_exitError $core_commandLine_exitCode_CONFIG "The configuration setting '$configurationSettingName' can not be empty"
+	fi
+}
+
+configure_validate_Boolean()
+{
+	if core_variable_isInvalidBoolean "$1"; then
+		core_exitError $core_commandLine_exitCode_CONFIG "The configuration setting '$configurationSettingName' ('$1') is not a valid boolean"
+	fi
+}
+
+configure_validate_ReadableSearchableFolderPath()
+{
+	if ! core_path_isReadableAndSearchableFolderPath "$1"; then
+		core_exitError $core_commandLine_exitCode_CONFIG "The configuration setting '$configurationSettingName' ('$1') is not a readable, searchable folder path"
+	fi
+}
