@@ -249,8 +249,7 @@ configure_register Value RpmLicence swaddle_rpm licence
 
 
 
-
+[swaddle]: https://github.com/raphaelcohn/swaddle "Swaddle homepage"
 [shellfire]: https://github.com/shellfire-dev "shellfire homepage"
 [core]: https://github.com/shellfire-dev/core "shellfire core module homepage"
-[swaddle]: https://github.com/raphaelcohn/swaddle "Swaddle homepage"
 [paths.d]: https://github.com/shellfire-dev/paths.d "paths.d shellfire module homepage"
