@@ -1,4 +1,4 @@
-# `configure`: functions module for shellfire
+# `configure`: functions module for [shellfire]
 
 This module provides a simple framework for managing configuration of a [shellfire] application. It is deliberately separate to the [core] module, which provides automatic loading of configuration for the command line at run time. Instead, it lets users define configuration in both files and directories of snippets, which can be overridden, defaulted, validated and restored.
 
