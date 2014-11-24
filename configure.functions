@@ -1,43 +1,6 @@
 core_usesIn core variable variable/array
 
-_configure_configurationNamespace()
-{
-	if [ $# -eq 1 ]; then
-		local namespace="$1"
-	fi
-	configurationSettingNamespace="${_program_namespace}_build_configuration_namespace_${namespace}"
-}
-
-_configure_configurationSettingValue()
-{
-	if [ $# -eq 2 ]; then
-		local namespace="$1"
-		local configurationSettingName="$2"
-	fi
-	local key="${namespace}_${configurationSettingName}"
-	configurationSettingValue="${_program_namespace}_build_configuration_value_${key}"
-}
-
-_configure_configurationSetting()
-{
-	local namespace="$1"
-	local configurationSettingName="$2"
-	local key="${namespace}_${configurationSettingName}"
-	_configure_configurationNamespace
-	_configure_configurationSettingValue
-	configurationSettingValidate="${_program_namespace}_build_configuration_validate_${key}"
-	configurationSettingDefault="${_program_namespace}_build_configuration_default_${key}"
-	configurationSettingIsArray="${_program_namespace}_build_configuration_isArray_${key}"
-}
-
-_configure_configurationSettingIsArray()
-{
-	local core_variable_indirectValue_result
-	core_variable_indirectValue "$configurationSettingIsArray"
-	core_variable_isTrue "$core_variable_indirectValue_result"
-}
-
-configure_getConfigurationSetting()
+configure_getValue()
 {
 	local namespace="$1"
 	local configurationSettingName="$2"
@@ -322,4 +285,41 @@ configure_validateValue()
 	fi
 	
 	rm "$validValuesFilePath"
+}
+
+_configure_configurationNamespace()
+{
+	if [ $# -eq 1 ]; then
+		local namespace="$1"
+	fi
+	configurationSettingNamespace="${_program_namespace}_build_configuration_namespace_${namespace}"
+}
+
+_configure_configurationSettingValue()
+{
+	if [ $# -eq 2 ]; then
+		local namespace="$1"
+		local configurationSettingName="$2"
+	fi
+	local key="${namespace}_${configurationSettingName}"
+	configurationSettingValue="${_program_namespace}_build_configuration_value_${key}"
+}
+
+_configure_configurationSetting()
+{
+	local namespace="$1"
+	local configurationSettingName="$2"
+	local key="${namespace}_${configurationSettingName}"
+	_configure_configurationNamespace
+	_configure_configurationSettingValue
+	configurationSettingValidate="${_program_namespace}_build_configuration_validate_${key}"
+	configurationSettingDefault="${_program_namespace}_build_configuration_default_${key}"
+	configurationSettingIsArray="${_program_namespace}_build_configuration_isArray_${key}"
+}
+
+_configure_configurationSettingIsArray()
+{
+	local core_variable_indirectValue_result
+	core_variable_indirectValue "$configurationSettingIsArray"
+	core_variable_isTrue "$core_variable_indirectValue_result"
 }
