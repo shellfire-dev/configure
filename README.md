@@ -1,8 +1,8 @@
 # `configure`: functions module for shellfire
 
-This module provides a simple framework for managing configuration of a [`shellfire`] application. It is deliberately separate to the [`core`] module, which provides automatic loading of configuration for the command line at run time. Instead, it lets users define configuration in both files and directories of snippets, which can be overridden, defaulted, validated and restored.
+This module provides a simple framework for managing configuration of a [shellfire] application. It is deliberately separate to the [core] module, which provides automatic loading of configuration for the command line at run time. Instead, it lets users define configuration in both files and directories of snippets, which can be overridden, defaulted, validated and restored.
 
-An example user is the [`swaddle`] packaging tool.
+An example user is the [swaddle] packaging tool.
 
 ## Overview
 
@@ -40,14 +40,14 @@ git submodule init --update
 
 You may need to change the url `https://github.com/shellfire-dev/configure.git"` above if using a fork.
 
-You will also need to add paths - include the module [`paths.d`].
+You will also need to add paths - include the module [paths.d].
 
 
 ## Namespace `configure`
 
 ### To use in code
 
-If calling from another [`shellfire`] module, add to your shell code the line
+If calling from another [shellfire] module, add to your shell code the line
 ```bash
 core_usesIn configure
 ```
@@ -90,7 +90,7 @@ The values of `configurationValidationFunction` are not constrained; you may def
 |`Boolean`|Value must be a boolean (eg yes, true, 1, on, Y, T, etc) as per `core_variable_isBoolean`|
 |`ReadableSearchableFolderPath`|Value must be a readable, searchable folder path|
 
-See the [`swaddle`] project for more examples of validation functions.
+See the [swaddle] project for more examples of validation functions.
 
 A `namespace` must consist only of lower and upper case letters, digits and underscores, to be compatible with all POSIX shells. This is not enforced, however.
 
@@ -104,7 +104,7 @@ The `default` may be whitespace-separated without using quotes; all values are c
 |`snippetName`|Name of a snippet|_No_|
 |`configurationSettingValue`|Value that would be retrieved from `configure_getValue`|_No_|
 
-This is a helper function to call when defining your own [`configurationValidationFunction`](#configure_register). It allows you to embed a list of values inside your code that might change. It uses the [`core`] snippet functions. For example:-
+This is a helper function to call when defining your own [`configurationValidationFunction`](#configure_register). It allows you to embed a list of values inside your code that might change. It uses the [core] snippet functions. For example:-
 ```bash
 core_snippet_embed raw validate_rpm_licence
 configure_validate_RpmLicence()
