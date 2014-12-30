@@ -244,7 +244,7 @@ Artistic 2.0
 
 Each entry is terminated by a line feed, including the final entry. If the value specified by configuration is in this list, it's valid. If it's not, its invalid. You can use your new validation function when registering, eg
 ```bash
-configure_register Value RpmLicence swaddle_rpm licence
+configure_register Value Licence swaddle licence
 ```
 
 
