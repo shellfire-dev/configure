@@ -94,6 +94,11 @@ configure_reset()
 			fi
 		fi
 	}
+	
+	if core_variable_array_isUnset "$configurationSettingNamespace"; then
+		return 0
+	fi
+	
 	core_variable_array_iterate "$configurationSettingNamespace" _configure_reset_callback
 }
 
@@ -176,6 +181,11 @@ configure_validate()
 	
 	local configurationSettingNamespace
 	_configure_configurationNamespace
+	
+	if core_variable_array_isUnset "$configurationSettingNamespace"; then
+		return 0
+	fi
+	
 	core_variable_array_iterate "$configurationSettingNamespace" _configure_validate_callback
 }
 
