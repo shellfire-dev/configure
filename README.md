@@ -4,6 +4,10 @@ This module provides a simple framework for managing configuration of a [shellfi
 
 An example user is the [swaddle] packaging tool.
 
+## Compatibility
+
+* Tag [`release_2015.0117.1750-1`](https://github.com/shellfire-dev/configure/releases/tag/release_2015.0117.1750-1) is compatible with [shellfire] release [`release_2015.0117.1750-1`](https://github.com/shellfire-dev/shellfire/releases/tag/release_2015.0117.1750-1).
+
 ## Overview
 
 Configuration is organised into namespaces which are _private_ to your program; specifying the same namespace in different programs will give different results.
