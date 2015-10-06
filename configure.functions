@@ -244,6 +244,7 @@ configure_callFunctionWithDefaultsIfEmpty()
 	fi
 }
 
+core_dependency_requires '*' rm
 configure_isValueValid()
 {
 	local snippetName="$1"
